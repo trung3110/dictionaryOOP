@@ -11,8 +11,12 @@ public class DictionaryCommandline {
         }
     }
 
-    public static void dictionaryBasic() {
+   /* public static void dictionaryBasic() {
         DictionaryManagement.insertFromCommandline();
+        DictionaryCommandline.showAllWords();
+    }*/
+    public static void dictionaryAdvanced() {
+        DictionaryManagement.insertfromFile();
         DictionaryCommandline.showAllWords();
     }
 
