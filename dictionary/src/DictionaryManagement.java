@@ -39,5 +39,29 @@ public class DictionaryManagement {
 
     }
 
+    public static void dictionaryLookup() {
+        Scanner sc = new Scanner(System.in);
+        int numWordList = Dictionary.WordList.size();
+        String explainWord = "";
+        boolean found = false;
+
+        System.out.println("Nhập từ tra cứu :");
+        String Word = sc.next();
+
+        for(int i=0 ; i< numWordList ; i++){
+            if(Dictionary.WordList.get(i).getWord_target().equals(Word)) {
+                explainWord = Dictionary.WordList.get(i).getWord_explain();
+                found = true;
+            }
+        }
+
+        if(found) {
+            System.out.printf("Nghĩa của từ %s là: %s", Word, explainWord);
+        }else {
+            System.out.println("Không tìm thấy từ cần tra cứu!");
+        }
+
+    }
+
 
 }

@@ -7,7 +7,7 @@ public class DictionaryCommandline {
             String engWord = Dictionary.WordList.get(i).getWord_target();
             String vieWord = Dictionary.WordList.get(i).getWord_explain();
 
-            System.out.printf("%d\t |%s\t\t |%s\n", i+1,vieWord ,engWord );
+            System.out.printf("%d\t |%s\t\t |%s\n", i+1,endWord ,vieWord );
         }
     }
 
@@ -18,9 +18,10 @@ public class DictionaryCommandline {
     public static void dictionaryAdvanced() {
         DictionaryManagement.insertfromFile();
         DictionaryCommandline.showAllWords();
+        DictionaryManagement.dictionaryLookup();
     }
 
     public static void main(String[] args){
-        dictionaryBasic();
+        dictionaryAdvanced();
     }
 }
