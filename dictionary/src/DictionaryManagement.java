@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 
 public class DictionaryManagement {
     public static void insertFromCommandline(){
@@ -63,5 +66,26 @@ public class DictionaryManagement {
 
     }
 
+    public static void dictionaryDelete() {
+        Scanner sc = new Scanner(System.in);
+        int sizeWordList = Dictionary.WordList.size();
+        int indexList = -1;
+
+        System.out.println("Nhập từ cần xóa :");
+        String Word = sc.next();
+
+        for(int i=0; i<sizeWordList; ++i) {
+            if (Dictionary.WordList.get(i).getWord_target().equals(Word)) {
+                indexList = i;
+            }
+        }
+
+        if (indexList > -1) {
+            Dictionary.WordList.remove(indexList);
+            System.out.println("Xóa thành công!");
+        } else {
+            System.out.println("Từ cần xóa không tồn tại!");
+        }
+    }
 
 }
