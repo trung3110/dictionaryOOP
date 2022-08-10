@@ -52,7 +52,7 @@ public class DictionaryManagement {
         String Word = sc.next();
 
         for(int i=0 ; i< numWordList ; i++){
-            if(Dictionary.WordList.get(i).getWord_target().equals(Word)) {
+            if (Dictionary.WordList.get(i).getWord_target().equals(Word)) {
                 explainWord = Dictionary.WordList.get(i).getWord_explain();
                 found = true;
             }
