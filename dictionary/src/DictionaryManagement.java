@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Formatter;
 import java.util.Scanner;
 
 
@@ -22,7 +23,7 @@ public class DictionaryManagement {
     public static void insertfromFile(){
 
         try {
-            File file = new File("src/dictionaries.txt");
+            File file = new File("D:\\dictionary.txt");
             Scanner sc = new Scanner(file);
             do {
                 String temp = sc.nextLine();
@@ -31,7 +32,7 @@ public class DictionaryManagement {
                     temp = temp.trim();
                     int index = temp.indexOf("  ");
                     String engWord = temp.substring(0,index);
-                    String vieWord = temp.substring(index + 5);
+                    String vieWord = temp.substring(index + 2);
 
                     Dictionary.WordList.add(new Word(engWord, vieWord));
                 }
@@ -42,13 +43,28 @@ public class DictionaryManagement {
 
     }
 
+    public static void updateFile() {
+        try {
+            Formatter f = new Formatter("D:\\dictionary.txt");
+
+            for (int i = 0; i < Dictionary.WordList.size(); ++i) {
+                String s = Dictionary.WordList.get(i).toString();
+                f.format("%s\n", s);
+            }
+
+            f.close();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+    }
+
     public static void dictionaryLookup() {
         Scanner sc = new Scanner(System.in);
         int numWordList = Dictionary.WordList.size();
         String explainWord = "";
         boolean found = false;
 
-        System.out.println("Nhập từ tra cứu :");
+        System.out.print("Nhập từ tra cứu: ");
         String Word = sc.next();
 
         for(int i=0 ; i< numWordList ; i++){
@@ -59,7 +75,7 @@ public class DictionaryManagement {
         }
 
         if(found) {
-            System.out.printf("Nghĩa của từ %s là: %s", Word, explainWord);
+            System.out.printf("Nghĩa của từ %s là: %s\n", Word, explainWord);
         }else {
             System.out.println("Không tìm thấy từ cần tra cứu!");
         }
@@ -71,7 +87,7 @@ public class DictionaryManagement {
         int sizeWordList = Dictionary.WordList.size();
         int indexList = -1;
 
-        System.out.println("Nhập từ cần xóa :");
+        System.out.print("Nhập từ cần xóa : ");
         String Word = sc.next();
 
         for(int i=0; i<sizeWordList; ++i) {
@@ -86,6 +102,34 @@ public class DictionaryManagement {
         } else {
             System.out.println("Từ cần xóa không tồn tại!");
         }
+
+        updateFile();
+    }
+
+    public static void dictionaryChanges() {
+        Scanner sc = new Scanner(System.in);
+        int sizeWordList = Dictionary.WordList.size();
+        int indexList = -1;
+
+        System.out.print("Nhập từ cần thay đổi : ");
+        String Word1 = sc.next();
+        System.out.print("Đổi thành : ");
+        String Word2 = sc.next();
+
+        for(int i=0; i < sizeWordList; ++i) {
+            if (Dictionary.WordList.get(i).getWord_target().equals(Word1)) {
+                indexList = i;
+            }
+        }
+
+        if (indexList > -1) {
+            Dictionary.WordList.get(indexList).setWord_target(Word2);
+            System.out.println("Thay đổi thành công!");
+        } else {
+            System.out.println("Từ cần thay đổi không tồn tại!");
+        }
+
+        updateFile();
     }
 
 }

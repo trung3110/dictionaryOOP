@@ -22,4 +22,8 @@ public class Word {
     public String getWord_explain() {
         return word_explain;
     }
+
+    public String toString() {
+        return getWord_target() + "  " + getWord_explain();
+    }
 }
