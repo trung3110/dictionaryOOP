@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class DictionaryManagement {
             sc.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             System.out.print("Nhập nghĩa tiếng việt: ");
             String vieWord = sc.nextLine();
-            Dictionary.WordList.add(new Word(engWord, vieWord));
+            Dictionary.WordList.add(new Word());
         }
     }
 
@@ -34,28 +36,13 @@ public class DictionaryManagement {
                     String engWord = temp.substring(0,index);
                     String vieWord = temp.substring(index + 2);
 
-                    Dictionary.WordList.add(new Word(engWord, vieWord));
+                    Dictionary.WordList.add(new Word());
                 }
             }while (sc.hasNextLine());
         } catch(FileNotFoundException e){
             System.out.println("File not found");
             }
 
-    }
-
-    public static void updateFile() {
-        try {
-            Formatter f = new Formatter("D:\\dictionary.txt");
-
-            for (int i = 0; i < Dictionary.WordList.size(); ++i) {
-                String s = Dictionary.WordList.get(i).toString();
-                f.format("%s\n", s);
-            }
-
-            f.close();
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
     }
 
     public static void dictionaryLookup() {
@@ -69,7 +56,7 @@ public class DictionaryManagement {
 
         for(int i=0 ; i< numWordList ; i++){
             if (Dictionary.WordList.get(i).getWord_target().equals(Word)) {
-                explainWord = Dictionary.WordList.get(i).getWord_explain();
+                explainWord = Dictionary.WordList.get(i).getWord_target();
                 found = true;
             }
         }
@@ -102,8 +89,6 @@ public class DictionaryManagement {
         } else {
             System.out.println("Từ cần xóa không tồn tại!");
         }
-
-        updateFile();
     }
 
     public static void dictionaryChanges() {
@@ -116,7 +101,7 @@ public class DictionaryManagement {
         System.out.print("Đổi thành : ");
         String Word2 = sc.next();
 
-        for(int i=0; i < sizeWordList; ++i) {
+        for(int i = 0; i < sizeWordList; ++i) {
             if (Dictionary.WordList.get(i).getWord_target().equals(Word1)) {
                 indexList = i;
             }
@@ -128,8 +113,30 @@ public class DictionaryManagement {
         } else {
             System.out.println("Từ cần thay đổi không tồn tại!");
         }
+    }
 
-        updateFile();
+    public static void dictionarySearcher(String s) throws SQLException {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Word> wrd = ConnectToSQL.importDatabase();
+
+        int l = BinarySearch.binarySearch(wrd, s);
+    }
+
+    public static void dictionaryExportToFile() throws SQLException {
+        ArrayList<Word> wrd = ConnectToSQL.importDatabase();
+
+        try {
+            Formatter f = new Formatter("D:\\dictionary.txt");
+
+            for (int i = 0; i < wrd.size(); ++i) {
+                String s = (i + 1) + ":\n" + wrd.get(i).fullWord();
+                f.format("%s\n", s);
+            }
+
+            f.close();
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
     }
 
 }
