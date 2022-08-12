@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ConnectToSQL {
   static final String url = "jdbc:mysql://127.0.0.1:3306/dictionary";
@@ -12,7 +13,7 @@ public class ConnectToSQL {
     Statement statement = connect.createStatement();
     ResultSet resultSet = statement.executeQuery("SELECT * FROM tbl_edict");
 
-    int test = 25;
+    int test = 30;
     while (resultSet.next()) {
       --test;
       String idx = resultSet.getString("idx");
@@ -22,7 +23,7 @@ public class ConnectToSQL {
       String[] s;
       s = detail.split(">");
       Word word = new Word();
-      word.setWord_target(word_target);
+      word.setWord_target(word_target.toLowerCase());
       VieMeanings wordMeans = new VieMeanings();
 
       for (int i = 0; i < s.length; i++) {

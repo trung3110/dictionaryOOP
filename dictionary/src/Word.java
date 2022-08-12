@@ -48,4 +48,9 @@ public class Word {
        }
        return s;
     }
+
+    public String toString() {
+       String s = meanings.get(0).getExplain();
+       return getWord_target() + "  " + s;
+    }
 }

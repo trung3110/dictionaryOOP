@@ -18,12 +18,34 @@ public class DictionaryManagement {
             sc.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
             System.out.print("Nhập nghĩa tiếng việt: ");
             String vieWord = sc.nextLine();
-            Dictionary.WordList.add(new Word());
+
+            ArrayList<VieMeanings> Vies = new ArrayList<VieMeanings>();
+            VieMeanings x = new VieMeanings("", vieWord, new ArrayList<String>());
+            Vies.add(x);
+
+            Word wrd = new Word();
+            wrd.setWord_target(engWord);
+            wrd.setMeanings(Vies);
+
+            Dictionary.WordList.add(wrd);
+        }
+    }
+
+    public static void updateFile() {
+        try {
+            Formatter f = new Formatter("D:\\dictionary.txt");
+
+            for (int i = 0; i < Dictionary.WordList.size(); ++i) {
+                String s = Dictionary.WordList.get(i).toString();
+                f.format("%s\n", s);
+            }
+            f.close();
+        } catch (Exception e) {
+            System.out.println("Error");
         }
     }
 
     public static void insertfromFile(){
-
         try {
             File file = new File("D:\\dictionary.txt");
             Scanner sc = new Scanner(file);
@@ -36,13 +58,21 @@ public class DictionaryManagement {
                     String engWord = temp.substring(0,index);
                     String vieWord = temp.substring(index + 2);
 
-                    Dictionary.WordList.add(new Word());
+                    ArrayList<VieMeanings> Vie = new ArrayList<VieMeanings>();
+                    VieMeanings x = new VieMeanings("", vieWord, new ArrayList<String>());
+                    Vie.add(x);
+
+                    Word wrd = new Word();
+                    wrd.setWord_target(engWord);
+                    wrd.setMeanings(Vie);
+
+                    Dictionary.WordList.add(wrd);
                 }
             }while (sc.hasNextLine());
         } catch(FileNotFoundException e){
             System.out.println("File not found");
             }
-
+        updateFile();
     }
 
     public static void dictionaryLookup() {
@@ -54,9 +84,10 @@ public class DictionaryManagement {
         System.out.print("Nhập từ tra cứu: ");
         String Word = sc.next();
 
-        for(int i=0 ; i< numWordList ; i++){
+        for(int i = 0 ; i < numWordList ; i++){
             if (Dictionary.WordList.get(i).getWord_target().equals(Word)) {
-                explainWord = Dictionary.WordList.get(i).getWord_target();
+                String s = Dictionary.WordList.get(i).getMeanings().get(0).getExplain();
+                explainWord = s;
                 found = true;
             }
         }
@@ -77,7 +108,7 @@ public class DictionaryManagement {
         System.out.print("Nhập từ cần xóa : ");
         String Word = sc.next();
 
-        for(int i=0; i<sizeWordList; ++i) {
+        for(int i = 0; i < sizeWordList; ++i) {
             if (Dictionary.WordList.get(i).getWord_target().equals(Word)) {
                 indexList = i;
             }
@@ -89,6 +120,7 @@ public class DictionaryManagement {
         } else {
             System.out.println("Từ cần xóa không tồn tại!");
         }
+        updateFile();
     }
 
     public static void dictionaryChanges() {
@@ -113,13 +145,23 @@ public class DictionaryManagement {
         } else {
             System.out.println("Từ cần thay đổi không tồn tại!");
         }
+        updateFile();
     }
 
-    public static void dictionarySearcher(String s) throws SQLException {
+    public static ArrayList<String> dictionarySearcher(ArrayList<Word> wrd, String s) throws SQLException {
         ArrayList<String> result = new ArrayList<String>();
-        ArrayList<Word> wrd = ConnectToSQL.importDatabase();
+        int l = BinarySearch.binarySearchL(wrd, s);
+        int r = BinarySearch.binarySearchR(wrd, s);
 
-        int l = BinarySearch.binarySearch(wrd, s);
+        if (l + 1 > r) {
+            result.add("Không tìm thấy kết quả!");
+            return result;
+        } else {
+            for (int i = l + 1; i <= r; ++i) {
+                result.add(wrd.get(i).getWord_target());
+            }
+        }
+        return result;
     }
 
     public static void dictionaryExportToFile() throws SQLException {

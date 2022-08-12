@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DictionaryCommandline {
     public static void showAllWords() {
@@ -8,21 +9,20 @@ public class DictionaryCommandline {
 
         for(int i = 0; i < numWordInDic; i++) {
             String engWord = Dictionary.WordList.get(i).getWord_target();
-            String vieWord = Dictionary.WordList.get(i).getWord_target();
-            System.out.printf("%d\t |%s\t |%s\n", i + 1, engWord, vieWord);
+            String vieWord = Dictionary.WordList.get(i).getMeanings().get(0).getExplain();
+            System.out.printf("%d\t |%s\t\t |%s\n", i + 1, engWord, vieWord);
         }
     }
 
     public static void dictionaryAdvanced() {
         DictionaryManagement.insertfromFile();
         DictionaryCommandline.showAllWords();
-        DictionaryManagement.dictionaryLookup();
+        DictionaryManagement.dictionaryDelete();
+        DictionaryManagement.dictionaryChanges();
+        showAllWords();
     }
 
-    public static void main(String[] args) throws SQLException {
-        //showAllWords();
-        //dictionaryAdvanced();
-        DictionaryManagement.dictionaryExportToFile();
-        //showAllWords();
+    public static void main(String[] arg) {
+        dictionaryAdvanced();
     }
 }

@@ -11,7 +11,7 @@ public class VieMeanings {
         this.Example = new ArrayList<String>();
     }
 
-    public VieMeanings(String pronunciation, String wordType, String explain, ArrayList<String> ExCase) {
+    public VieMeanings(String wordType, String explain, ArrayList<String> ExCase) {
         this.wordType = wordType;
         this.explain = explain;
         this.Example = ExCase;
