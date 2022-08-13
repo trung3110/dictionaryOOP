@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Pane layoutX="7.0" layoutY="11.0" style="-fx-background-color: #b3742d;">
+         <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="56.0" prefWidth="694.0" style="-fx-font-weight: bold;" text="DICTIONARY APPLICATION" textFill="#4e0f0f">
+                    <font>
+                        <Font name="Constantia" size="22.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="NONE" />
+                    </cursor>
+                </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="10.0" layoutY="89.0" prefHeight="471.0" prefWidth="272.0" style="-fx-background-color: #e0d7cc;">
+         <children>
+                <TextField fx:id="inputWord" layoutX="9.0" layoutY="8.0" onKeyReleased="#readKeyPressed" pickOnBounds="false" prefHeight="38.0" prefWidth="255.0" promptText="English Word" />
+                <ListView fx:id="listView" layoutX="9.0" layoutY="54.0" onMouseClicked="#getFieldChoosed" prefHeight="403.0" prefWidth="255.0" styleClass="listView" />
+         </children>
+      </Pane>
+      <Pane layoutX="294.0" layoutY="89.0" prefHeight="471.0" prefWidth="355.0">
+         <children>
+                <Label fx:id="vieWord" layoutY="2.0" prefHeight="56.0" prefWidth="355.0" style="-fx-background-color: #c0c4c1;" />
+                <Label fx:id="description" layoutY="72.0" prefHeight="389.0" prefWidth="294.0" />
+                <ImageView fx:id="btn_playAudio" fitHeight="32.0" fitWidth="23.0" layoutX="318.0" layoutY="19.0" onMouseClicked="#playAudio" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@image/icon_Volume.png" />
+                    </image>
+                </ImageView>
+         </children>
+      </Pane>
+        <Pane layoutX="645.0" layoutY="84.0" prefHeight="200.0" prefWidth="56.0">
+            <children>
+                <ImageView fitHeight="32.0" fitWidth="31.0" layoutX="13.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@image/add-icon-png-2468.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="btn_edit" fitHeight="32.0" fitWidth="23.0" layoutX="18.0" layoutY="55.0" onMouseClicked="#showEditScene" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@image/icons_Edit.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="btn_delete" fitHeight="32.0" fitWidth="23.0" layoutX="22.0" layoutY="98.0" onMouseClicked="#showDeleteScene" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@image/icons_trash.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
