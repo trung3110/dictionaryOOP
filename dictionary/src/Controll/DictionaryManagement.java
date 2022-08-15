@@ -144,6 +144,7 @@ public class DictionaryManagement {
 
     public static ArrayList<String> dictionarySearcher(String s) throws SQLException {
         ArrayList<String> result = new ArrayList<String>();
+        //ArrayList<Word> wrd = ConnectToSQL.importDatabase();
         int l = BinarySearch.binarySearchL(s);
         int r = BinarySearch.binarySearchR(s);
 
@@ -156,6 +157,21 @@ public class DictionaryManagement {
             }
         }
         return result;
+    }
+
+    public static Word dictionarySearchers(String s) throws SQLException {
+        int l = BinarySearch.binarySearchL(s);
+        int r = BinarySearch.binarySearchR(s);
+        Word wrd = new Word();
+        if (l != -1) {
+            if (l + 1 > r) {
+                wrd = Dictionary.WordList.get(r);
+            } else {
+                wrd = Dictionary.WordList.get(l + 1);
+            }
+        }
+        //System.out.println(wrd.fullWord());
+        return wrd;
     }
 
     public static void dictionaryExportToFile() throws SQLException {

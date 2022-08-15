@@ -25,7 +25,7 @@ public class BinarySearch {
         while (l < r) {
             int m = (l + r + 1) / 2;
             if (Dictionary.WordList.get(m).getWord_target().compareTo(s) >= 0) {
-                if ( Dictionary.WordList.get(m).getWord_target().contains(s) ) {
+                if ( Dictionary.WordList.get(m).getWord_target().startsWith(s) ) {
                     l = m;
                 } else {
                     r = m - 1;

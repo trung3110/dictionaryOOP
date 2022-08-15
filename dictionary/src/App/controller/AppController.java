@@ -1,5 +1,6 @@
 package App.controller;
 
+import Controll.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,10 +34,15 @@ public class AppController {
     private Label description;
     @FXML
     private ListView<String> listView;
-
+    @FXML
+    private ListView<String> detail;
 
     private ObservableList<String> similarWord;
+    private ObservableList<String> similarWord1;
     private String pathAudio = null;
+
+    public AppController() {
+    }
 
 
     //nhập từ tìm kiếm và hiển thị danh sách từ gợi ý trùng với input
@@ -57,17 +63,25 @@ public class AppController {
     //chọn từ trong danh sách gợi ý
     public void getFieldChoosed() throws SQLException {
         String valField = listView.getSelectionModel().getSelectedItem();
+        Word wrd = new Word();
         if (valField != null) {
             inputWord.setText(valField);
-            DictionaryManagement.dictionarySearcher(valField);
+            wrd = DictionaryManagement.dictionarySearchers(valField);
         }
+
+        //description.setText(wrd.fullWord());
+        similarWord1 =
+                FXCollections.observableArrayList( wrd.getMeanings().toString() );
+        detail.setItems(similarWord1);
+        //detail.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        vieWord.setText(wrd.getPronunciation());
     }
 
     //chuyển scence
     public void showEditScene(MouseEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(Main.url + "/View/edit.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/edit.fxml"));
 
         Parent editParent = loader.load();
         Scene editScene = new Scene(editParent, 900, 600);
@@ -80,7 +94,7 @@ public class AppController {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(Main.url + "/View/delete.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/delete.fxml"));
 
         Parent editParent = loader.load();
         Scene editScene = new Scene(editParent);
@@ -92,7 +106,7 @@ public class AppController {
     public void playAudio() {
         if(pathAudio != null && !pathAudio.isEmpty()) {
             try {
-                Media audio = new Media(this.getClass().getResource("main/resources/data/audio/" + pathAudio).toString());
+                Media audio = new Media(this.getClass().getResource("/resources/data/audio/" + pathAudio).toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(audio);
                 mediaPlayer.play();
             }

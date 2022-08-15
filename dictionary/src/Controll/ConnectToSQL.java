@@ -3,72 +3,103 @@ package Controll;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ConnectToSQL {
   static final String url = "jdbc:mysql://127.0.0.1:3306/dictionary";
   static String password = "2417116qaz";
   static String username = "root";
-  static ArrayList<Word> wordList = new ArrayList<>();
+  static ArrayList<Word> wordList = new ArrayList<Word>();
 
   public static ArrayList<Word> importDatabase() throws SQLException {
     Connection connect = DriverManager.getConnection(url, username, password);
     Statement statement = connect.createStatement();
     ResultSet resultSet = statement.executeQuery("SELECT * FROM tbl_edict");
 
-    int test = 30;
+    int test = 50000;
     while (resultSet.next()) {
-      --test;
+      //--test;
       String idx = resultSet.getString("idx");
-      String word_target = resultSet.getString("word");
+      String wordtarget = resultSet.getString("word");
       String detail = resultSet.getString("detail");
 
-      String[] s;
-      s = detail.split(">");
+      String[] s1 = null;
+      s1 = detail.split(">");
       Word word = new Word();
-      word.setWord_target(word_target.toLowerCase());
-      VieMeanings wordMeans = new VieMeanings();
+      word.setWord_target(wordtarget.toLowerCase());
+      VieMeanings wordMean = new VieMeanings();
 
-      int n = s.length;
+      int n = s1.length;
       String res = "";
-      s = Arrays.copyOf( s , n + 1);
+      String[] s = Arrays.copyOf( s1 , n + 1);
       s[n] = ".";
 
+      int d = 0;
+      int dem = 0;
       for (int i = 0; i < n; i++) {
 
         if (s[i].startsWith("@")) {
+            ++d;
             s[i] = s[i].replace("<br /", "");
+            s[i] = s[i].replace("</Q", "");
             s[i] = s[i].replace("@", "");
-            word.setPronunciation(s[i]);
+            if ( d == 1 ) {
+              word.setPronunciation(s[i]);
+            } else {
+              wordMean.setWordType(s[i]);
+            }
+            dem = 0;
         }
 
         if (s[i].startsWith("-")) {
+          ++dem;
           s[i] = s[i].replace("<br /", "");
+          s[i] = s[i].replace("</Q", "");
           s[i] = s[i].replace("- ", "");
-          res = "_Ý nghĩa : " + s[i] + "\n" + "Ví dụ :";
+          res =  "Ý nghĩa " + dem + " : " + s[i] + "\n";
+
 
           if (!s[i + 1].startsWith("=")) {
-            res += "\n";
-            wordMeans.addExplain(res);
+            wordMean.addExplain(res);
             res = "";
+          } else {
+            res += "Ví dụ :";
           }
+
+          if ( !s[i + 1].startsWith("-") && !s[i + 1].startsWith("=") ) {
+            word.addMeans(wordMean);
+            wordMean = new VieMeanings();
+            dem = 0;
+          }
+
+          if ( s[i - 1].startsWith("@") && d > 1) {
+            wordMean.addExplain(res);
+            res = "";
+            word.addMeans(wordMean);
+            wordMean = new VieMeanings();
+            dem = 0;
+          }
+
         }
 
         if (s[i].startsWith("=")) {
           s[i] = s[i].replace("<br /", "");
           s[i] = s[i].replace("+", " :");
+          s[i] = s[i].replace("</Q", "");
           s[i] = s[i].replace("=", "+, ");
+
           res += "\n\t" + s[i];
 
           if ( !s[i + 1].startsWith("=") ) {
             res += "\n";
-            wordMeans.addExplain(res);
+            wordMean.addExplain(res);
             res = "";
 
             if ( !s[i + 1].startsWith("-") ) {
-              //if ( word.getMeanings() == null ) System.out.println("vc");
-              word.addMeans(wordMeans);
-              //System.out.println( word.getMeanings().size() );
-              wordMeans = new VieMeanings();
+              word.addMeans(wordMean);
+              dem = 0;
+              wordMean = new VieMeanings();
             }
           }
         }
@@ -76,8 +107,10 @@ public class ConnectToSQL {
         if (s[i].startsWith("*")) {
           //wordMeans = new VieMeanings();
           s[i] = s[i].replace("<br /", "");
+          s[i] = s[i].replace("</Q", "");
           s[i] = s[i].replace("*  ", "");
-          wordMeans.setWordType(s[i]);
+          wordMean.setWordType(s[i]);
+          dem = 0;
         }
       }
 
@@ -91,6 +124,18 @@ public class ConnectToSQL {
     resultSet.close();
     statement.close();
     connect.close();
+
+    Collections.sort(wordList, new Comparator<Word>() {
+      @Override
+      public int compare(Word wrd1, Word wrd2) {
+        if (wrd1.getWord_target().compareTo(wrd2.getWord_target()) <= 0 ) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    });
+
     return wordList;
   }
 

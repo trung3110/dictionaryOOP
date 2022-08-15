@@ -36,7 +36,7 @@ public class EditController  {
     public void actionDirectAdd(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/add.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/edit.fxml"));
 
         Parent addParent = loader.load();
         Scene addScene = new Scene(addParent);
@@ -47,7 +47,7 @@ public class EditController  {
     public void actionDirectBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/app.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/edit.fxml"));
 
         Parent root = loader.load();
         Scene scene = new Scene(root);

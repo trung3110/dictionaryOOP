@@ -37,7 +37,7 @@ public class DeleteController  implements Initializable{
     public void actionDirectBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/app.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/delete.fxml"));
 
         Parent root = loader.load();
         Scene scene = new Scene(root);

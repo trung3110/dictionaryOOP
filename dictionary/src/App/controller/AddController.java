@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static App.controller.Main.url;
+
 public class AddController  implements Initializable {
     @FXML
     TextField add_eng, add_vie, add_type, add_pathAudio;
@@ -43,7 +45,7 @@ public class AddController  implements Initializable {
     public void directEdit(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/edit.fxml"));
+        loader.setLocation(getClass().getResource(url + "/edit.fxml"));
 
         Parent editParent = loader.load();
         Scene editScene = new Scene(editParent, 900, 600);

@@ -8,6 +8,7 @@ public class VieMeanings {
     private ArrayList<String> listExplain;
 
     public VieMeanings() {
+        this.wordType = "";
         listExplain = new ArrayList<String>();
     }
 
@@ -15,10 +16,6 @@ public class VieMeanings {
         this.wordType = wordType;
     }
 
-    public VieMeanings(String wordType, ArrayList<String> listExplain) {
-        this.wordType = wordType;
-        this.listExplain = listExplain;
-    }
     public String getWordType() {
         return wordType;
     }
@@ -27,15 +24,26 @@ public class VieMeanings {
         this.wordType = wordType;
     }
 
-    public void addExplain(String ex) {
-        listExplain.add(ex);
+    public ArrayList<String> getListExplain() {
+        return listExplain;
     }
 
+    public void addExplain(String ex) {
+        listExplain.add(ex);
+        //System.out.println(listExplain.get(0));
+    }
     public String toString() {
-        String s = "*Loại từ : " + this.wordType;
+        String s = "\n";
+        if ( this.wordType != null ) {
+            s = "\n" + "LOẠI TỪ : " + this.wordType;
+        }
+        //System.out.println( getListExplain().size());
         for (int i = 0; i < listExplain.size(); ++i) {
-            s += "\n";
+            if ( s != "" ) {
+                s += "\n";
+            }
             s += listExplain.get(i);
+            //System.out.println(listExplain.get(i));
         }
 
         return s;

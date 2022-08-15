@@ -9,6 +9,9 @@ public class Word {
    private ArrayList<VieMeanings> meanings;
 
    public Word() {
+       this.word_explain = "";
+       this.word_target = "";
+       this.pronunciation = "";
        meanings = new ArrayList<VieMeanings>();
    }
 
