@@ -67,7 +67,7 @@ public class AppController {
     public void showEditScene(MouseEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/edit.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/View/edit.fxml"));
 
         Parent editParent = loader.load();
         Scene editScene = new Scene(editParent, 900, 600);
@@ -80,7 +80,7 @@ public class AppController {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/View/delete.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/View/delete.fxml"));
 
         Parent editParent = loader.load();
         Scene editScene = new Scene(editParent);
@@ -92,7 +92,7 @@ public class AppController {
     public void playAudio() {
         if(pathAudio != null && !pathAudio.isEmpty()) {
             try {
-                Media audio = new Media(this.getClass().getResource("/data/audio/" + pathAudio).toString());
+                Media audio = new Media(this.getClass().getResource("main/resources/data/audio/" + pathAudio).toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(audio);
                 mediaPlayer.play();
             }

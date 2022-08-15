@@ -23,6 +23,7 @@ public class DictionaryCommandline {
         DictionaryManagement.dictionaryDelete();
         DictionaryManagement.dictionaryChanges();
         showAllWords();
+
     }
 
     public static void main(String[] arg) throws SQLException {

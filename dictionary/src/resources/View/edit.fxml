@@ -33,6 +33,7 @@
                         <Font size="18.0" />
                      </font></Text>
                </children>
+
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>

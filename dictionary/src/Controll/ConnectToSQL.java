@@ -159,6 +159,9 @@ public class ConnectToSQL {
     System.out.println("Done!");
   }
 
-
+  /*public static void EditDatabase() {
+    Word wrd;
+    for (int i = 0)
+  }*/
 
 }

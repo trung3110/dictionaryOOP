@@ -54,4 +54,10 @@ public class EditController  {
 
         stage.setScene(scene);
     }
+
+    public void update(ActionEvent actionEvent) {
+    }
+
+    public void export(ActionEvent actionEvent) {
+    }
 }
