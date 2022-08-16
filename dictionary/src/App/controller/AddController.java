@@ -52,7 +52,4 @@ public class AddController  implements Initializable {
 
         stage.setScene(editScene);
     }
-
-    public void addNewWord(ActionEvent actionEvent) {
-    }
 }

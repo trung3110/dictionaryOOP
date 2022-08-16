@@ -34,6 +34,11 @@ public class BinarySearch {
                 l = m + 1;
             }
         }
-        return r;
+
+        if ( Dictionary.WordList.get(r).getWord_target().startsWith(s) ) {
+            return r;
+        } else {
+            return -1;
+        }
     }
 }

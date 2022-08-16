@@ -36,7 +36,7 @@ public class DeleteController  implements Initializable{
     public void actionDirectBack(ActionEvent event) throws IOException {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(Main.url + "/delete.fxml"));
+        loader.setLocation(getClass().getResource(Main.url + "/app.fxml"));
 
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -54,12 +54,7 @@ public class DeleteController  implements Initializable{
             int x = DictionaryManagement.dictionarySearchers(del_queryWord);
             Word wrd = Dictionary.WordList.get(x);
 
-            System.out.println(wrd.getWord_target() + " " + del_queryWord);
-
             if (wrd.getWord_target().equals(del_queryWord)) {
-
-
-
                 if(!del_queryType.equals("")) {
                     int kt = -1;
                     for (int i = 0; i < wrd.getMeanings().size(); ++i) {
@@ -67,11 +62,10 @@ public class DeleteController  implements Initializable{
                             kt = i;
                         }
                     }
-
                     if ( kt != -1 ) {
                         String s = Dictionary.WordList.get(x).getMeanings().toString();
                         Dictionary.WordList.get(x).getMeanings().remove(kt);
-                        ConnectToSQL.DeleteTypeDatabase(s , del_queryWord);
+                        ConnectToSQL.EditDatabase(s , del_queryWord);
                         del_message.setText("Xóa 1 loại của từ thành công !!!");
                     } else {
                         del_message.setText("Không tồn tại loại của từ cần xóa !!!");
@@ -85,9 +79,6 @@ public class DeleteController  implements Initializable{
 
             }
             else del_message.setText("Từ bạn xóa không tồn tại !!!");
-
         }
-
     }
-
 }

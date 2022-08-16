@@ -38,8 +38,8 @@ public class DictionaryCommandline {
         ConnectToSQL.DeleteTypeDatabase(wrd.fullWord(), wrd.getWord_target());*/
 
         Dictionary.WordList = ConnectToSQL.importDatabase();
-        Word s = DictionaryManagement.dictionarySearchers("1");
-
+        int x = DictionaryManagement.dictionarySearchers("0");
+        Word s = Dictionary.WordList.get(x);
         System.out.println(s.fullWord());
 
     }

@@ -39,7 +39,7 @@ public class AppController {
 
     private ObservableList<String> similarWord;
     private ObservableList<String> similarWord1;
-    private String pathAudio = null;
+    private String pathAudio = "height.mp3";
 
     public AppController() {
     }
@@ -64,7 +64,7 @@ public class AppController {
     public void getFieldChoosed() throws SQLException {
         String valField = listView.getSelectionModel().getSelectedItem();
         Word wrd = new Word();
-        if (valField != null) {
+        if (valField != null && valField != "Không tìm thấy kết quả!") {
             inputWord.setText(valField);
             int x = DictionaryManagement.dictionarySearchers(valField);
             wrd = Dictionary.WordList.get(x);
@@ -90,6 +90,17 @@ public class AppController {
         stage.setScene(editScene);
     }
 
+    public void showTranslationScene(MouseEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(Main.url + "/translate.fxml"));
+
+        Parent editParent = loader.load();
+        Scene editScene = new Scene(editParent, 900, 600);
+
+        stage.setScene(editScene);
+    }
+
     //chuyển scence
     public void showDeleteScene(MouseEvent event) throws IOException {
 
@@ -105,19 +116,7 @@ public class AppController {
 
     // mở file phát âm
     public void playAudio() {
-        if(pathAudio != null && !pathAudio.isEmpty()) {
-            try {
-                Media audio = new Media(this.getClass().getResource("/resources/data/audio/" + pathAudio).toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(audio);
-                mediaPlayer.play();
-            }
-            catch (Exception e) {
-                System.out.println("Lỗi !!! không tạo được Media audio");
-            }
-        }
-        else {
-            System.out.println("Thiếu file phát âm");
-        }
+        TextToSpeech.speakText(inputWord.getText());
     }
 
 }
