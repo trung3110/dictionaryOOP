@@ -14,13 +14,13 @@ public class ConnectToSQL {
   static ArrayList<Word> wordList = new ArrayList<Word>();
 
   public static ArrayList<Word> importDatabase() throws SQLException {
-    Connection connect = DriverManager.getConnection(url1, username, password);
+    Connection connect = DriverManager.getConnection(url, username, password);
     Statement statement = connect.createStatement();
-    ResultSet resultSet = statement.executeQuery("SELECT * FROM trantoan");
+    ResultSet resultSet = statement.executeQuery("SELECT * FROM tbl_edict");
 
-    int test = 50000;
+    int test = 30;
     while (resultSet.next()) {
-      //--test;
+     // --test;
       String idx = resultSet.getString("idx");
       String wordtarget = resultSet.getString("word");
       String detail = resultSet.getString("detail");
@@ -126,17 +126,6 @@ public class ConnectToSQL {
     statement.close();
     connect.close();
 
-    Collections.sort(wordList, new Comparator<Word>() {
-      @Override
-      public int compare(Word wrd1, Word wrd2) {
-        if (wrd1.getWord_target().compareTo(wrd2.getWord_target()) <= 0 ) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-    });
-
     return wordList;
   }
 
@@ -144,11 +133,11 @@ public class ConnectToSQL {
 
     int sz = Dictionary.WordList.size();
 
-    try (Connection connection = DriverManager.getConnection(url1, username, password)){
+    try (Connection connection = DriverManager.getConnection(url, username, password)){
       Statement stmt;
       stmt = connection.createStatement();
 
-      String sql = "INSERT INTO trantoan (idx, word, detail) VALUES (?, ?, ?)";
+      String sql = "INSERT INTO tbl_edict (idx, word, detail) VALUES (?, ?, ?)";
       PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       pstmt.setString(2, wrd.getWord_target());
       pstmt.setInt(1, sz + 1);
@@ -166,11 +155,11 @@ public class ConnectToSQL {
 
   public static void DeleteDatabase(String wrd)  {
 
-    try (Connection connection = DriverManager.getConnection(url1, username, password)){
+    try (Connection connection = DriverManager.getConnection(url, username, password)){
       Statement stmt;
       stmt = connection.createStatement();
 
-      String sql = "DELETE FROM trantoan WHERE word = (?)";
+      String sql = "DELETE FROM tbl_edict WHERE word = (?)";
       PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       pstmt.setString(1, wrd);
       pstmt.executeUpdate();
@@ -184,13 +173,13 @@ public class ConnectToSQL {
     System.out.println("Done!");
   }
 
-  public static void DeleteTypeDatabase(String wrd1, String wrd2)  {
+  public static void EditDatabase(String wrd1, String wrd2)  {
 
-    try (Connection connection = DriverManager.getConnection(url1, username, password)){
+    try (Connection connection = DriverManager.getConnection(url, username, password)){
       Statement stmt;
       stmt = connection.createStatement();
 
-      String sql = "UPDATE trantoan SET detail = (?) WHERE word = (?)";
+      String sql = "UPDATE tbl_edict SET detail = (?) WHERE word = (?)";
       PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       pstmt.setString(1, wrd1);
       pstmt.setString(2, wrd2);
@@ -203,9 +192,6 @@ public class ConnectToSQL {
       se.printStackTrace();
     }
     System.out.println("Done!");
-  }
-
-  public static void EditDatabase() {
   }
 
 }

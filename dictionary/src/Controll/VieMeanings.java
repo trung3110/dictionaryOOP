@@ -1,11 +1,12 @@
 package Controll;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VieMeanings {
     private String wordType;
 
-    private ArrayList<String> listExplain;
+    private List<String> listExplain;
 
     public VieMeanings() {
         this.wordType = "";
@@ -16,6 +17,11 @@ public class VieMeanings {
         this.wordType = wordType;
     }
 
+    public VieMeanings(String wordType, List<String> listExplain) {
+        this.wordType = wordType;
+        this.listExplain = listExplain;
+    }
+
     public String getWordType() {
         return wordType;
     }
@@ -24,13 +30,25 @@ public class VieMeanings {
         this.wordType = wordType;
     }
 
-    public ArrayList<String> getListExplain() {
+    public List<String> getListExplain() {
         return listExplain;
     }
 
     public void addExplain(String ex) {
         listExplain.add(ex);
         //System.out.println(listExplain.get(0));
+    }
+
+    public String getInfoExplain() {
+        String s = "";
+        for (int i = 0; i < listExplain.size(); ++i) {
+            if ( s != "" ) {
+                s += "\n";
+            }
+            s += listExplain.get(i);
+        }
+
+        return s;
     }
     public String toString() {
         String s = "\n";

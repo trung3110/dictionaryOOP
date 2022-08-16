@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -13,18 +19,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controller.EditController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controller.EditController">
    <children>
       <HBox layoutY="82.0" prefHeight="505.0" prefWidth="900.0">
          <children>
             <Pane prefHeight="482.0" prefWidth="346.0">
                <children>
-                  <Label layoutX="14.0" layoutY="144.0" text="Nhập Từ Tiếng Anh Cần Sửa">
+                  <Label layoutX="14.0" layoutY="144.0" text="Nhập Từ Tiếng Anh">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font></Label>
                   <TextField fx:id="up_input" layoutX="14.0" layoutY="175.0" prefHeight="31.0" prefWidth="269.0" />
-                  <Button fx:id="btn_up_ok" focusTraversable="false" layoutX="294.0" layoutY="175.0" mnemonicParsing="false" onAction="#export" prefHeight="31.0" prefWidth="41.0" text="OK">
+                  <Button fx:id="btn_up_ok" focusTraversable="false" layoutX="14.0" layoutY="222.0" mnemonicParsing="false" onAction="#export" prefHeight="31.0" prefWidth="41.0" text="OK">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
@@ -38,39 +44,34 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </Pane>
-            <Pane fx:id="layout_update" prefHeight="501.0" prefWidth="542.0">
+            <Pane fx:id="layout_update" prefHeight="505.0" prefWidth="640.0">
                <children>
-                  <Label layoutX="41.0" layoutY="51.0" text="Từ Tiếng Anh" />
-                  <TextField fx:id="up_outEng" disable="true" layoutX="175.0" layoutY="46.0" prefHeight="31.0" prefWidth="348.0" />
-                  <Label layoutX="41.0" layoutY="217.0" text="Loại Từ" />
-                  <TextField fx:id="up_outVie" disable="true" layoutX="175.0" layoutY="130.0" prefHeight="31.0" prefWidth="348.0" />
-                  <Label layoutX="41.0" layoutY="135.0" text="Nghĩa Tiếng Việt" />
-                  <TextField fx:id="up_outType" disable="true" layoutX="173.0" layoutY="212.0" prefHeight="32.0" prefWidth="224.0" />
-                  <Label layoutX="41.0" layoutY="305.0" text="Bổ Nghĩa" />
-                  <TextArea fx:id="up_outExtra" disable="true" layoutX="175.0" layoutY="267.0" prefHeight="143.0" prefWidth="348.0" />
-                  <Button fx:id="btn_update" disable="true" layoutX="260.0" layoutY="433.0" mnemonicParsing="false" onAction="#update" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #84db92;" text="Cập nhật ">
+                  <Label layoutX="14.0" layoutY="51.0" prefHeight="24.0" prefWidth="98.0" text="Từ Tiếng Anh" />
+                  <Label layoutX="14.0" layoutY="121.0" prefHeight="31.0" prefWidth="82.0" text="Loại Từ" />
+                  <TextField fx:id="up_outType" disable="true" layoutX="128.0" layoutY="121.0" prefHeight="32.0" prefWidth="269.0" />
+                  <Label layoutX="14.0" layoutY="189.0" prefHeight="31.0" prefWidth="75.0" text="Giải thích" />
+                  <TextArea fx:id="up_outExtra" disable="true" layoutX="130.0" layoutY="189.0" prefHeight="221.0" prefWidth="441.0" wrapText="true" />
+                  <Button fx:id="btn_update" disable="true" layoutX="241.0" layoutY="433.0" mnemonicParsing="false" onAction="#update" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #84db92;" text="Cập nhật ">
                      <font>
                         <Font name="Calibri" size="18.0" />
                      </font></Button>
-                  <Button fx:id="btn_directAdd" layoutX="90.0" layoutY="433.0" mnemonicParsing="false" onAction="#actionDirectAdd" prefHeight="35.0" prefWidth="98.0" style="-fx-background-color: #1be0fa;" text="Thêm từ">
+                  <Button fx:id="btn_back" layoutX="435.0" layoutY="433.0" mnemonicParsing="false" onAction="#actionDirectBack" prefHeight="35.0" prefWidth="88.0" text="Trở về">
                      <font>
-                        <Font name="Calibri Bold" size="18.0" />
+                        <Font name="Calibri" size="18.0" />
+                     </font></Button>
+                  <Label fx:id="wordTargetLabel" layoutX="155.0" layoutY="49.0" prefHeight="27.0" prefWidth="314.0">
+                     <font>
+                        <Font size="18.0" />
                      </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets></Button>
-                  <Button fx:id="btn_back" layoutX="422.0" layoutY="433.0" mnemonicParsing="false" onAction="#actionDirectBack" prefHeight="35.0" prefWidth="88.0" text="Trở về">
-                     <font>
-                        <Font name="Calibri" size="18.0" />
-                     </font></Button>
-                  <MenuButton fx:id="menuType" disable="true" layoutX="418.0" layoutY="211.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="105.0" text="Loại từ" />
+                  </Label>
+                  <ChoiceBox fx:id="choiceType" disable="true" layoutX="436.0" layoutY="121.0" prefHeight="32.0" prefWidth="135.0" />
                </children>
             </Pane>
          </children>
       </HBox>
       <Pane layoutX="7.0" layoutY="13.0" prefHeight="58.0" prefWidth="883.0" style="-fx-background-color: #b3742d;">
          <children>
-            <Label layoutX="37.0" layoutY="13.0" text="Chỉnh sửa từ vựng">
+            <Label layoutX="37.0" layoutY="13.0" text="Chỉnh sửa Từ Điển">
                <font>
                   <Font name="Calibri Bold Italic" size="28.0" />
                </font>
