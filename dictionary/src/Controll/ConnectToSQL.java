@@ -8,14 +8,15 @@ import java.util.Comparator;
 
 public class ConnectToSQL {
   static final String url = "jdbc:mysql://127.0.0.1:3306/dictionary";
+  static final String url1 = "jdbc:mysql://127.0.0.1:3306/loltoan";
   static String password = "2417116qaz";
   static String username = "root";
   static ArrayList<Word> wordList = new ArrayList<Word>();
 
   public static ArrayList<Word> importDatabase() throws SQLException {
-    Connection connect = DriverManager.getConnection(url, username, password);
+    Connection connect = DriverManager.getConnection(url1, username, password);
     Statement statement = connect.createStatement();
-    ResultSet resultSet = statement.executeQuery("SELECT * FROM tbl_edict");
+    ResultSet resultSet = statement.executeQuery("SELECT * FROM trantoan");
 
     int test = 50000;
     while (resultSet.next()) {
@@ -143,11 +144,11 @@ public class ConnectToSQL {
 
     int sz = Dictionary.WordList.size();
 
-    try (Connection connection = DriverManager.getConnection(url, username, password)){
+    try (Connection connection = DriverManager.getConnection(url1, username, password)){
       Statement stmt;
       stmt = connection.createStatement();
 
-      String sql = "INSERT INTO tbl_edict (idx, word, detail) VALUES (?, ?, ?)";
+      String sql = "INSERT INTO trantoan (idx, word, detail) VALUES (?, ?, ?)";
       PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       pstmt.setString(2, wrd.getWord_target());
       pstmt.setInt(1, sz + 1);
@@ -165,11 +166,11 @@ public class ConnectToSQL {
 
   public static void DeleteDatabase(String wrd)  {
 
-    try (Connection connection = DriverManager.getConnection(url, username, password)){
+    try (Connection connection = DriverManager.getConnection(url1, username, password)){
       Statement stmt;
       stmt = connection.createStatement();
 
-      String sql = "DELETE FROM tbl_edict WHERE word = (?)";
+      String sql = "DELETE FROM trantoan WHERE word = (?)";
       PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       pstmt.setString(1, wrd);
       pstmt.executeUpdate();
@@ -185,11 +186,11 @@ public class ConnectToSQL {
 
   public static void DeleteTypeDatabase(String wrd1, String wrd2)  {
 
-    try (Connection connection = DriverManager.getConnection(url, username, password)){
+    try (Connection connection = DriverManager.getConnection(url1, username, password)){
       Statement stmt;
       stmt = connection.createStatement();
 
-      String sql = "UPDATE tbl_edict SET detail = (?) WHERE word = (?)";
+      String sql = "UPDATE trantoan SET detail = (?) WHERE word = (?)";
       PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       pstmt.setString(1, wrd1);
       pstmt.setString(2, wrd2);
@@ -204,9 +205,7 @@ public class ConnectToSQL {
     System.out.println("Done!");
   }
 
-  /*public static void EditDatabase() {
-    Word wrd;
-    for (int i = 0)
-  }*/
+  public static void EditDatabase() {
+  }
 
 }

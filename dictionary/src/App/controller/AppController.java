@@ -1,6 +1,6 @@
 package App.controller;
 
-import Controll.Word;
+import Controll.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Dictionary;
+
 import Controll.DictionaryManagement;
 
 public class AppController {
@@ -66,7 +66,8 @@ public class AppController {
         Word wrd = new Word();
         if (valField != null) {
             inputWord.setText(valField);
-            wrd = DictionaryManagement.dictionarySearchers(valField);
+            int x = DictionaryManagement.dictionarySearchers(valField);
+            wrd = Dictionary.WordList.get(x);
         }
 
         //description.setText(wrd.fullWord());

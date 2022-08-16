@@ -159,19 +159,21 @@ public class DictionaryManagement {
         return result;
     }
 
-    public static Word dictionarySearchers(String s) throws SQLException {
+    public static int dictionarySearchers(String s) throws SQLException {
         int l = BinarySearch.binarySearchL(s);
         int r = BinarySearch.binarySearchR(s);
         Word wrd = new Word();
         if (l != -1) {
             if (l + 1 > r) {
                 wrd = Dictionary.WordList.get(r);
+                return r;
             } else {
                 wrd = Dictionary.WordList.get(l + 1);
+                return  l + 1;
             }
         }
         //System.out.println(wrd.fullWord());
-        return wrd;
+        return -1;
     }
 
     public static void dictionaryExportToFile() throws SQLException {

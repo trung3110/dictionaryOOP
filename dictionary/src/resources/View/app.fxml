@@ -22,113 +22,129 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="802.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="802.0" prefWidth="1200.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controller.AppController">
+<AnchorPane maxHeight="802.0" maxWidth="1200.0" minHeight="800.0" minWidth="1200.0" prefHeight="802.0"
+            prefWidth="1200.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.controller.AppController">
     <children>
-        <Pane fx:id="header" maxHeight="83.0" maxWidth="1200.0" minHeight="60.0" minWidth="1200.0" prefHeight="83.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane fx:id="header" maxHeight="83.0" maxWidth="1200.0" minHeight="60.0" minWidth="1200.0" prefHeight="83.0"
+              prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label fx:id="header_content" contentDisplay="CENTER" layoutX="376.0" layoutY="15.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="494.0" text="DICTIONARY APPLICATION" textAlignment="CENTER">
+                <Label fx:id="header_content" contentDisplay="CENTER" layoutX="376.0" layoutY="15.0"
+                       minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="494.0"
+                       text="DICTIONARY APPLICATION" textAlignment="CENTER">
                     <padding>
-                        <Insets left="30.0" />
+                        <Insets left="30.0"/>
                     </padding>
                 </Label>
             </children>
         </Pane>
-        <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
+        <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="400.0"
+              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0">
             <children>
-                <VBox layoutX="15.0" layoutY="41.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="385.0">
+                <VBox layoutX="15.0" layoutY="41.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0"
+                      prefWidth="385.0">
                     <children>
                         <HBox prefHeight="77.0" prefWidth="385.0" VBox.vgrow="NEVER">
                             <VBox.margin>
-                                <Insets bottom="10.0" />
+                                <Insets bottom="10.0"/>
                             </VBox.margin>
                             <children>
-                                <TextField fx:id="inputWord" onKeyReleased="#readKeyPressed" pickOnBounds="false" prefHeight="61.0" prefWidth="386.0">
+                                <TextField fx:id="inputWord" onKeyReleased="#readKeyPressed" pickOnBounds="false"
+                                           prefHeight="61.0" prefWidth="386.0">
                                     <font>
-                                        <Font size="18.0" />
+                                        <Font size="18.0"/>
                                     </font>
                                 </TextField>
                             </children>
                         </HBox>
-                        <ListView fx:id="listView" focusTraversable="false" onMouseClicked="#getFieldChoosed" prefHeight="584.0" prefWidth="385.0" styleClass="listView" VBox.vgrow="NEVER">
+                        <ListView fx:id="listView" focusTraversable="false" onMouseClicked="#getFieldChoosed"
+                                  prefHeight="584.0" prefWidth="385.0" styleClass="listView" VBox.vgrow="NEVER">
                             <rotationAxis>
-                                <Point3D />
+                                <Point3D/>
                             </rotationAxis>
                             <opaqueInsets>
-                                <Insets />
+                                <Insets/>
                             </opaqueInsets>
                             <VBox.margin>
-                                <Insets />
+                                <Insets/>
                             </VBox.margin>
                         </ListView>
                     </children>
                     <padding>
-                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0"/>
                     </padding>
                 </VBox>
             </children>
         </Pane>
-        <Pane fx:id="translate_content" layoutY="84.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0" prefWidth="801.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="84.0">
+        <Pane fx:id="translate_content" layoutY="84.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="718.0"
+              prefWidth="801.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="84.0">
             <children>
                 <VBox layoutY="15.0" prefHeight="695.0" prefWidth="782.0">
                     <children>
                         <HBox fx:id="feature" prefHeight="50.0" prefWidth="767.0">
                             <children>
-                                <Label fx:id="vieWord" contentDisplay="CENTER" prefHeight="61.0" prefWidth="595.0" style="-fx-border-radius: 10px;">
+                                <Label fx:id="vieWord" contentDisplay="CENTER" prefHeight="61.0" prefWidth="595.0"
+                                       style="-fx-border-radius: 10px;">
                                     <padding>
-                                        <Insets left="20.0" />
+                                        <Insets left="20.0"/>
                                     </padding>
                                     <HBox.margin>
-                                        <Insets right="10.0" />
+                                        <Insets right="10.0"/>
                                     </HBox.margin>
                                 </Label>
-                                <ImageView fx:id="btn_playAudio" fitHeight="42.0" fitWidth="41.0" onMouseClicked="#playAudio" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="btn_playAudio" fitHeight="42.0" fitWidth="41.0"
+                                           onMouseClicked="#playAudio" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@image/icon_Volume.png" />
+                                        <Image url="@image/icon_Volume.png"/>
                                     </image>
                                     <viewport>
-                                        <Rectangle2D />
+                                        <Rectangle2D/>
                                     </viewport>
                                     <cursor>
-                                        <Cursor fx:constant="HAND" />
+                                        <Cursor fx:constant="HAND"/>
                                     </cursor>
                                     <HBox.margin>
-                                        <Insets right="10.0" top="15.0" />
+                                        <Insets right="10.0" top="15.0"/>
                                     </HBox.margin>
                                 </ImageView>
-                                <ImageView fx:id="btn_edit" fitHeight="42.0" fitWidth="39.0" onMouseClicked="#showEditScene" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="btn_edit" fitHeight="42.0" fitWidth="39.0"
+                                           onMouseClicked="#showEditScene" pickOnBounds="true" preserveRatio="true">
                                     <viewport>
-                                        <Rectangle2D />
+                                        <Rectangle2D/>
                                     </viewport>
                                     <cursor>
-                                        <Cursor fx:constant="HAND" />
+                                        <Cursor fx:constant="HAND"/>
                                     </cursor>
                                     <HBox.margin>
-                                        <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="15.0"/>
                                     </HBox.margin>
                                     <image>
-                                        <Image url="@image/icons_Edit.png" />
+                                        <Image url="@image/icons_Edit.png"/>
                                     </image>
                                 </ImageView>
-                                <ImageView fx:id="btn_delete" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#showDeleteScene" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="btn_delete" fitHeight="40.0" fitWidth="40.0"
+                                           onMouseClicked="#showDeleteScene" pickOnBounds="true" preserveRatio="true">
                                     <HBox.margin>
-                                        <Insets bottom="10.0" left="5.0" right="10.0" top="15.0" />
+                                        <Insets bottom="10.0" left="5.0" right="10.0" top="15.0"/>
                                     </HBox.margin>
                                     <image>
-                                        <Image url="@image/icons_trash.png" />
+                                        <Image url="@image/icons_trash.png"/>
                                     </image>
                                     <cursor>
-                                        <Cursor fx:constant="HAND" />
+                                        <Cursor fx:constant="HAND"/>
                                     </cursor>
                                 </ImageView>
                             </children>
                         </HBox>
-                  <ListView fx:id="detail" focusTraversable="false" prefHeight="711.0" prefWidth="767.0" styleClass="listView" VBox.vgrow="NEVER">
-                     <rotationAxis>
-                        <Point3D />
-                     </rotationAxis></ListView>
+                        <ListView fx:id="detail" focusTraversable="false" prefHeight="711.0" prefWidth="767.0"
+                                  styleClass="listView" VBox.vgrow="NEVER">
+                            <rotationAxis>
+                                <Point3D/>
+                            </rotationAxis>
+                        </ListView>
                     </children>
                     <padding>
-                        <Insets bottom="16.0" left="5.0" right="10.0" top="13.0" />
+                        <Insets bottom="16.0" left="5.0" right="10.0" top="13.0"/>
                     </padding>
                 </VBox>
             </children>

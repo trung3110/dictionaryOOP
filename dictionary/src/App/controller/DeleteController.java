@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DeleteController  implements Initializable{
@@ -23,8 +24,6 @@ public class DeleteController  implements Initializable{
     Button btn_delete;
     @FXML
     TextField del_input, del_inputType;
-
-    private Word data ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,16 +45,21 @@ public class DeleteController  implements Initializable{
     }
 
     //xóa từ trong Database
-    public void deleteWord() {
+    public void deleteWord() throws SQLException {
         del_message.setText("");
         if(!btn_delete.isDisable()) {
             String del_queryWord = del_input.getText();
             String del_queryType = del_inputType.getText();
 
-            int x = BinarySearch.binarySearchR(del_queryWord);
+            int x = DictionaryManagement.dictionarySearchers(del_queryWord);
             Word wrd = Dictionary.WordList.get(x);
 
-            if (wrd.getWord_target() == del_queryWord) {
+            System.out.println(wrd.getWord_target() + " " + del_queryWord);
+
+            if (wrd.getWord_target().equals(del_queryWord)) {
+
+
+
                 if(!del_queryType.equals("")) {
                     int kt = -1;
                     for (int i = 0; i < wrd.getMeanings().size(); ++i) {
@@ -65,16 +69,16 @@ public class DeleteController  implements Initializable{
                     }
 
                     if ( kt != -1 ) {
+                        String s = Dictionary.WordList.get(x).getMeanings().toString();
                         Dictionary.WordList.get(x).getMeanings().remove(kt);
-                        String s = Dictionary.WordList.get(x).fullWord();
-                        ConnectToSQL.DeleteTypeDatabase(s , Dictionary.WordList.get(x).getWord_target());
+                        ConnectToSQL.DeleteTypeDatabase(s , del_queryWord);
                         del_message.setText("Xóa 1 loại của từ thành công !!!");
                     } else {
                         del_message.setText("Không tồn tại loại của từ cần xóa !!!");
                     }
                 }
                 else {
-                    ConnectToSQL.DeleteDatabase(Dictionary.WordList.get(x).getWord_target());
+                    ConnectToSQL.DeleteDatabase(del_queryWord);
                     Dictionary.WordList.remove(x);
                     del_message.setText("Xóa từ thành công !!!");
                 }
