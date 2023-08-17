@@ -25,6 +25,8 @@ public class ConnectToSQL {
       String wordtarget = resultSet.getString("word");
       String detail = resultSet.getString("detail");
 
+
+
       String[] s1 = null;
       s1 = detail.split(">");
       Word word = new Word();
@@ -38,13 +40,15 @@ public class ConnectToSQL {
 
       int d = 0;
       int dem = 0;
+
       for (int i = 0; i < n; i++) {
 
-        if (s[i].startsWith("@")) {
+        if (s[i].startsWith("@") || s[i].startsWith("!")) {
             ++d;
             s[i] = s[i].replace("<br /", "");
             s[i] = s[i].replace("</Q", "");
             s[i] = s[i].replace("@", "");
+            s[i] = s[i].replace("!", "");
             if ( d == 1 ) {
               word.setPronunciation(s[i]);
             } else {

@@ -70,11 +70,9 @@ public class AppController {
             wrd = Dictionary.WordList.get(x);
         }
 
-        //description.setText(wrd.fullWord());
         similarWord1 =
                 FXCollections.observableArrayList( wrd.getMeanings().toString() );
         detail.setItems(similarWord1);
-        //detail.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         vieWord.setText(wrd.getPronunciation());
     }
 

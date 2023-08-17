@@ -28,19 +28,8 @@ public class DictionaryCommandline {
     public static void main(String[] arg) throws SQLException {
         //dictionaryAdvanced();
 
-        /*ArrayList<String> ab = new ArrayList<>();
-        ab.add("asasas"); ab.add("abcxyz");
-        VieMeanings vie = new VieMeanings("as" , ab);
-        ArrayList<VieMeanings> vieMeanings = new ArrayList<>();
-        vieMeanings.add(vie);
-        Word wrd = new Word("hai" , "hai", "eo", vieMeanings);
         Dictionary.WordList = ConnectToSQL.importDatabase();
-        ConnectToSQL.DeleteTypeDatabase(wrd.fullWord(), wrd.getWord_target());*/
 
-        Dictionary.WordList = ConnectToSQL.importDatabase();
-        int x = DictionaryManagement.dictionarySearchers("0");
-        Word s = Dictionary.WordList.get(x);
-        System.out.println(s.fullWord());
 
     }
 }
